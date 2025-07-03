@@ -80,99 +80,96 @@ const SignInForm = () => {
   }
 
   return (
-    <div className="min-h-screen mt-20">
-      <div className="flex p-3 max-w-3xl sm:max-w-5xl mx-auto flex-col md:flex-row md:items-center gap-5">
-        {/* left */}
-        <div className="flex-1">
-          <Link
-            to={"/"}
-            className="font-bold text-2xl sm:text-4xl flex flex-wrap"
-          >
-            <span className="text-slate-500">Morning</span>
-            <span className="text-slate-900">Dispatch</span>
-          </Link>
+    
+    <div className="min-h-screen bg-yellow-50 flex items-center justify-center px-4 py-12">
+  <div className="max-w-6xl w-full grid md:grid-cols-2 gap-12 items-center">
 
-          <h2 className="text-[24px] md:text-[30px] font-bold leading-[140%] tracking-tighter pt-5 sm:pt-12">
-            Sign in to your account.
-          </h2>
+    <div className="space-y-6">
+      <Link to="/" className="text-4xl font-extrabold tracking-tight">
+        <span className="text-amber-500">News</span>
+        <span className="text-slate-800">World</span>
+      </Link>
 
-          <p className="text-slate-500 text-[14px] font-medium leading-[140%] md:text-[16px] md:font-normal mt-2">
-            Welcome back, Please provide your details
-          </p>
-        </div>
-
-        {/* right */}
-        <div className="flex-1">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="xyz@email.com"
-                        {...field}
-                      />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Password"
-                        {...field}
-                      />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <Button
-                type="submit"
-                className="bg-blue-500 w-full"
-                disabled={loading}
-              >
-                {loading ? (
-                  <span className="animate-pulse">Loading...</span>
-                ) : (
-                  <span>Sign In</span>
-                )}
-              </Button>
-
-              <GoogleAuth />
-            </form>
-          </Form>
-
-          <div className="flex gap-2 text-sm mt-5">
-            <span>Don't have an account?</span>
-
-            <Link to="/sign-up" className="text-blue-500">
-              Sign Up
-            </Link>
-          </div>
-
-          {errorMessage && <p className="mt-5 text-red-500">{errorMessage}</p>}
-        </div>
-      </div>
+      <h2 className="text-3xl font-bold text-slate-800">
+        Sign in to your account
+      </h2>
+      <p className="text-gray-600 text-base">
+        Stay updated with what's happening around the globe.
+      </p>
     </div>
+
+    <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md border border-gray-200">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-slate-700">Email</FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder="you@example.com"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-slate-700">Password</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder="••••••••"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <Button
+            type="submit"
+            className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 rounded-md transition"
+            disabled={loading}
+          >
+            {loading ? (
+              <span className="animate-pulse">Loading...</span>
+            ) : (
+              <span>Sign In</span>
+            )}
+          </Button>
+
+          <GoogleAuth />
+        </form>
+      </Form>
+
+      <div className="text-center text-sm mt-6">
+        <span className="text-gray-600">Don’t have an account?</span>{' '}
+        <Link to="/sign-up" className="text-amber-600 font-medium hover:underline">
+          Sign Up
+        </Link>
+      </div>
+
+      {errorMessage && (
+        <p className="mt-4 text-red-600 text-sm text-center">{errorMessage}</p>
+      )}
+    </div>
+  </div>
+</div>
+
   )
 }
 
