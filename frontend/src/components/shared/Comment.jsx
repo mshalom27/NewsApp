@@ -71,126 +71,250 @@ const Comment = ({ comment, onLike, onEdit, onDelete }) => {
   }
 
   return (
-    <div className="flex p-4 border-b border-slate-300 text-sm gap-2">
-      <div className="flex-shrink-0 mr-0">
-        <img
-          src={user.profilePicture}
-          alt={user.username}
-          className="w-10 h-10 rounded-full bg-gray-200"
-        />
-      </div>
+    // <div className="flex p-4 border-b border-slate-300 text-sm gap-2">
+    //   <div className="flex-shrink-0 mr-0">
+    //     <img
+    //       src={user.profilePicture}
+    //       alt={user.username}
+    //       className="w-10 h-10 rounded-full bg-gray-200"
+    //     />
+    //   </div>
 
-      <div className="flex-1">
-        <div className="flex items-center mb-1">
-          <span className="font-semibold mr-1 text-sm truncate">
-            {user ? `@${user.username}` : "Unknown"}
-          </span>
+    //   <div className="flex-1">
+    //     <div className="flex items-center mb-1">
+    //       <span className="font-semibold mr-1 text-sm truncate">
+    //         {user ? `@${user.username}` : "Unknown"}
+    //       </span>
 
-          <span className="text-gray-500 text-sm">
-            {moment(comment.createdAt).fromNow()}
-          </span>
-        </div>
+    //       <span className="text-gray-500 text-sm">
+    //         {moment(comment.createdAt).fromNow()}
+    //       </span>
+    //     </div>
 
-        {isEditing ? (
-          <>
-            <Textarea
-              className="mb-2"
-              value={editedContent}
-              onChange={(e) => setEditedContent(e.target.value)}
-            />
+    //     {isEditing ? (
+    //       <>
+    //         <Textarea
+    //           className="mb-2"
+    //           value={editedContent}
+    //           onChange={(e) => setEditedContent(e.target.value)}
+    //         />
 
-            <div className="flex justify-end gap-2 text-sm">
-              <Button
-                type="button"
-                className="bg-green-600"
-                onClick={handleSave}
-              >
-                Save
-              </Button>
+    //         <div className="flex justify-end gap-2 text-sm">
+    //           <Button
+    //             type="button"
+    //             className="bg-green-600"
+    //             onClick={handleSave}
+    //           >
+    //             Save
+    //           </Button>
 
-              <Button
-                type="button"
-                className="hover:border-red-500 hover:text-red-500"
-                variant="outline"
-                onClick={() => setIsEditing(false)}
-              >
-                Cancel
-              </Button>
-            </div>
-          </>
-        ) : (
-          <>
-            <p className="text-slate-600 pb-2">{comment.content}</p>
+    //           <Button
+    //             type="button"
+    //             className="hover:border-red-500 hover:text-red-500"
+    //             variant="outline"
+    //             onClick={() => setIsEditing(false)}
+    //           >
+    //             Cancel
+    //           </Button>
+    //         </div>
+    //       </>
+    //     ) : (
+    //       <>
+    //         <p className="text-slate-600 pb-2">{comment.content}</p>
 
-            <div className="flex items-center pt-2 text-sm border-t border-slate-300 max-w-fit gap-2">
-              <button
-                type="button"
-                onClick={() => onLike(comment._id)}
-                className={`text-gray-400 hover:text-blue-500 ${
-                  currentUser &&
-                  comment.likes.includes(currentUser._id) &&
-                  "!text-blue-600"
-                }`}
-              >
-                <AiFillLike className="text-lg" />
-              </button>
+    //         <div className="flex items-center pt-2 text-sm border-t border-slate-300 max-w-fit gap-2">
+    //           <button
+    //             type="button"
+    //             onClick={() => onLike(comment._id)}
+    //             className={`text-gray-400 hover:text-blue-500 ${
+    //               currentUser &&
+    //               comment.likes.includes(currentUser._id) &&
+    //               "!text-blue-600"
+    //             }`}
+    //           >
+    //             <AiFillLike className="text-lg" />
+    //           </button>
 
-              <p className="text-gray-400">
-                {comment.numberOfLikes > 0 &&
-                  comment.numberOfLikes +
-                    " " +
-                    (comment.numberOfLikes === 1 ? "like" : "likes")}
-              </p>
+    //           <p className="text-gray-400">
+    //             {comment.numberOfLikes > 0 &&
+    //               comment.numberOfLikes +
+    //                 " " +
+    //                 (comment.numberOfLikes === 1 ? "like" : "likes")}
+    //           </p>
 
-              {currentUser &&
-                (currentUser._id === comment.userId || currentUser.isAdmin) && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={handleEdit}
-                      className="text-gray-400 hover:text-green-600"
-                    >
-                      Edit
-                    </button>
+    //           {currentUser &&
+    //             (currentUser._id === comment.userId || currentUser.isAdmin) && (
+    //               <>
+    //                 <button
+    //                   type="button"
+    //                   onClick={handleEdit}
+    //                   className="text-gray-400 hover:text-green-600"
+    //                 >
+    //                   Edit
+    //                 </button>
 
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <span className="text-gray-400 hover:text-red-600 cursor-pointer">
-                          Delete
-                        </span>
-                      </AlertDialogTrigger>
+    //                 <AlertDialog>
+    //                   <AlertDialogTrigger asChild>
+    //                     <span className="text-gray-400 hover:text-red-600 cursor-pointer">
+    //                       Delete
+    //                     </span>
+    //                   </AlertDialogTrigger>
 
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>
-                            Are you absolutely sure?
-                          </AlertDialogTitle>
+    //                   <AlertDialogContent>
+    //                     <AlertDialogHeader>
+    //                       <AlertDialogTitle>
+    //                         Are you absolutely sure?
+    //                       </AlertDialogTitle>
 
-                          <AlertDialogDescription>
-                            This action cannot be undone. This will permanently
-                            delete your comment and remove your data from our
-                            servers.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
+    //                       <AlertDialogDescription>
+    //                         This action cannot be undone. This will permanently
+    //                         delete your comment and remove your data from our
+    //                         servers.
+    //                       </AlertDialogDescription>
+    //                     </AlertDialogHeader>
 
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction
-                            className="bg-red-600"
-                            onClick={() => onDelete(comment._id)}
-                          >
-                            Continue
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
-                  </>
-                )}
-            </div>
-          </>
-        )}
-      </div>
+    //                     <AlertDialogFooter>
+    //                       <AlertDialogCancel>Cancel</AlertDialogCancel>
+    //                       <AlertDialogAction
+    //                         className="bg-red-600"
+    //                         onClick={() => onDelete(comment._id)}
+    //                       >
+    //                         Continue
+    //                       </AlertDialogAction>
+    //                     </AlertDialogFooter>
+    //                   </AlertDialogContent>
+    //                 </AlertDialog>
+    //               </>
+    //             )}
+    //         </div>
+    //       </>
+    //     )}
+    //   </div>
+    // </div>
+
+    <div className="flex p-4 border-b border-amber-100 text-sm gap-3 bg-white">
+  {/* Profile Image */}
+  <div className="flex-shrink-0">
+    <img
+      src={user.profilePicture}
+      alt={user.username}
+      className="w-10 h-10 rounded-full bg-amber-100 object-cover"
+    />
+  </div>
+
+  {/* Comment Content */}
+  <div className="flex-1">
+    {/* Header */}
+    <div className="flex items-center mb-1 justify-between">
+      <span className="font-semibold text-slate-800 truncate">
+        {user ? `@${user.username}` : "Unknown"}
+      </span>
+      <span className="text-gray-400 text-xs">
+        {moment(comment.createdAt).fromNow()}
+      </span>
     </div>
+
+    {/* Comment Edit Mode */}
+    {isEditing ? (
+      <>
+        <Textarea
+          className="mb-2 border border-amber-300 focus:ring-amber-500"
+          value={editedContent}
+          onChange={(e) => setEditedContent(e.target.value)}
+        />
+        <div className="flex justify-end gap-2">
+          <Button
+            type="button"
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded-md text-sm"
+            onClick={handleSave}
+          >
+            Save
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            className="border-red-400 text-red-500 hover:bg-red-50 text-sm"
+            onClick={() => setIsEditing(false)}
+          >
+            Cancel
+          </Button>
+        </div>
+      </>
+    ) : (
+      <>
+        {/* Static Comment */}
+        <p className="text-slate-700 mb-3">{comment.content}</p>
+
+        {/* Actions */}
+        <div className="flex items-center gap-4 text-xs text-slate-500 border-t border-amber-100 pt-2">
+          {/* Like Button */}
+          <button
+            type="button"
+            onClick={() => onLike(comment._id)}
+            className={`hover:text-amber-600 transition ${
+              currentUser &&
+              comment.likes.includes(currentUser._id) &&
+              "text-amber-700"
+            }`}
+          >
+            <AiFillLike className="text-base" />
+          </button>
+
+          {/* Like Count */}
+          {comment.numberOfLikes > 0 && (
+            <span className="text-gray-500">
+              {comment.numberOfLikes}{" "}
+              {comment.numberOfLikes === 1 ? "like" : "likes"}
+            </span>
+          )}
+
+          {/* Admin/User Actions */}
+          {currentUser &&
+            (currentUser._id === comment.userId || currentUser.isAdmin) && (
+              <>
+                <button
+                  type="button"
+                  onClick={handleEdit}
+                  className="text-green-600 hover:underline"
+                >
+                  Edit
+                </button>
+
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <span className="text-red-500 hover:underline cursor-pointer">
+                      Delete
+                    </span>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>
+                        Are you absolutely sure?
+                      </AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This action cannot be undone. Your comment will be
+                        permanently deleted.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction
+                        className="bg-red-600 text-white hover:bg-red-700"
+                        onClick={() => onDelete(comment._id)}
+                      >
+                        Continue
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </>
+            )}
+        </div>
+      </>
+    )}
+  </div>
+</div>
+
   )
 }
 

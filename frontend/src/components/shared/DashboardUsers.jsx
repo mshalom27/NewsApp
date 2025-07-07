@@ -96,106 +96,204 @@ const DashboardUsers = () => {
   }
 
   return (
+    // <div className="flex flex-col items-center justify-center w-full p-3">
+    //   {currentUser.isAdmin && users.length > 0 ? (
+    //     <>
+    //       <Table>
+    //         <TableCaption>A list of your recent subscribers.</TableCaption>
+
+    //         <TableHeader>
+    //           <TableRow>
+    //             <TableHead className="w-[200px]">Joined On</TableHead>
+    //             <TableHead>User Image</TableHead>
+    //             <TableHead>Username</TableHead>
+    //             <TableHead>Email</TableHead>
+    //             <TableHead>Admin</TableHead>
+    //             <TableHead>Delete</TableHead>
+    //           </TableRow>
+    //         </TableHeader>
+
+    //         {users.map((user) => (
+    //           <TableBody className="divide-y" key={user._id}>
+    //             <TableRow>
+    //               <TableCell>
+    //                 {new Date(user.createdAt).toLocaleDateString()}
+    //               </TableCell>
+
+    //               <TableCell>
+    //                 <img
+    //                   src={user.profilePicture}
+    //                   alt={user.username}
+    //                   className="w-10 h-10 object-cover bg-gray-500 rounded-full"
+    //                 />
+    //               </TableCell>
+
+    //               <TableCell>{user.username}</TableCell>
+
+    //               <TableCell>{user.email}</TableCell>
+
+    //               <TableCell>
+    //                 {user.isAdmin ? (
+    //                   <FaCheck className="text-green-600" />
+    //                 ) : (
+    //                   <RxCross2 className="text-red-600" />
+    //                 )}
+    //               </TableCell>
+
+    //               <TableCell>
+    //                 <AlertDialog>
+    //                   <AlertDialogTrigger asChild>
+    //                     <span
+    //                       onClick={() => {
+    //                         setUserIdToDelete(user._id)
+    //                       }}
+    //                       className="font-medium text-red-600 hover:underline cursor-pointer"
+    //                     >
+    //                       Delete
+    //                     </span>
+    //                   </AlertDialogTrigger>
+
+    //                   <AlertDialogContent>
+    //                     <AlertDialogHeader>
+    //                       <AlertDialogTitle>
+    //                         Are you absolutely sure?
+    //                       </AlertDialogTitle>
+
+    //                       <AlertDialogDescription>
+    //                         This action cannot be undone. This will permanently
+    //                         delete your subscriber and remove your data from our
+    //                         servers.
+    //                       </AlertDialogDescription>
+    //                     </AlertDialogHeader>
+
+    //                     <AlertDialogFooter>
+    //                       <AlertDialogCancel>Cancel</AlertDialogCancel>
+    //                       <AlertDialogAction
+    //                         className="bg-red-600"
+    //                         onClick={handleDeleteUser}
+    //                       >
+    //                         Continue
+    //                       </AlertDialogAction>
+    //                     </AlertDialogFooter>
+    //                   </AlertDialogContent>
+    //                 </AlertDialog>
+    //               </TableCell>
+    //             </TableRow>
+    //           </TableBody>
+    //         ))}
+    //       </Table>
+
+    //       {showMore && (
+    //         <button
+    //           onClick={handleShowMore}
+    //           className="w-full text-blue-700 self-center text-sm py-7"
+    //         >
+    //           Show more
+    //         </button>
+    //       )}
+    //     </>
+    //   ) : (
+    //     <p>You have no subscriber yet!</p>
+    //   )}
+    // </div>
+
     <div className="flex flex-col items-center justify-center w-full p-3">
-      {currentUser.isAdmin && users.length > 0 ? (
-        <>
-          <Table>
-            <TableCaption>A list of your recent subscribers.</TableCaption>
+  {currentUser.isAdmin && users.length > 0 ? (
+    <>
+      <Table>
+        <TableCaption className="text-sm text-muted-foreground mt-4">
+          A list of your recent subscribers.
+        </TableCaption>
 
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[200px]">Joined On</TableHead>
-                <TableHead>User Image</TableHead>
-                <TableHead>Username</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>Admin</TableHead>
-                <TableHead>Delete</TableHead>
-              </TableRow>
-            </TableHeader>
+        <TableHeader className="bg-amber-100 text-slate-800">
+          <TableRow>
+            <TableHead className="w-[160px] font-semibold">Joined On</TableHead>
+            <TableHead className="font-semibold">User Image</TableHead>
+            <TableHead className="font-semibold">Username</TableHead>
+            <TableHead className="font-semibold">Email</TableHead>
+            <TableHead className="font-semibold">Admin</TableHead>
+            <TableHead className="font-semibold text-center">Delete</TableHead>
+          </TableRow>
+        </TableHeader>
 
-            {users.map((user) => (
-              <TableBody className="divide-y" key={user._id}>
-                <TableRow>
-                  <TableCell>
-                    {new Date(user.createdAt).toLocaleDateString()}
-                  </TableCell>
+        {users.map((user) => (
+          <TableBody className="divide-y" key={user._id}>
+            <TableRow className="hover:bg-amber-50">
+              <TableCell className="text-sm">
+                {new Date(user.createdAt).toLocaleDateString()}
+              </TableCell>
 
-                  <TableCell>
-                    <img
-                      src={user.profilePicture}
-                      alt={user.username}
-                      className="w-10 h-10 object-cover bg-gray-500 rounded-full"
-                    />
-                  </TableCell>
+              <TableCell>
+                <img
+                  src={user.profilePicture}
+                  alt={user.username}
+                  className="w-10 h-10 object-cover rounded-full border border-slate-300"
+                />
+              </TableCell>
 
-                  <TableCell>{user.username}</TableCell>
+              <TableCell className="font-medium text-slate-700">{user.username}</TableCell>
 
-                  <TableCell>{user.email}</TableCell>
+              <TableCell className="text-slate-600">{user.email}</TableCell>
 
-                  <TableCell>
-                    {user.isAdmin ? (
-                      <FaCheck className="text-green-600" />
-                    ) : (
-                      <RxCross2 className="text-red-600" />
-                    )}
-                  </TableCell>
+              <TableCell>
+                {user.isAdmin ? (
+                  <FaCheck className="text-green-600 text-lg" />
+                ) : (
+                  <RxCross2 className="text-red-500 text-lg" />
+                )}
+              </TableCell>
 
-                  <TableCell>
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <span
-                          onClick={() => {
-                            setUserIdToDelete(user._id)
-                          }}
-                          className="font-medium text-red-600 hover:underline cursor-pointer"
-                        >
-                          Delete
-                        </span>
-                      </AlertDialogTrigger>
+              <TableCell className="text-center">
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <span
+                      onClick={() => setUserIdToDelete(user._id)}
+                      className="text-red-600 hover:underline cursor-pointer text-sm font-medium"
+                    >
+                      Delete
+                    </span>
+                  </AlertDialogTrigger>
 
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>
-                            Are you absolutely sure?
-                          </AlertDialogTitle>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This action cannot be undone. It will permanently delete this user and
+                        all their data.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
 
-                          <AlertDialogDescription>
-                            This action cannot be undone. This will permanently
-                            delete your subscriber and remove your data from our
-                            servers.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction
+                        className="bg-red-600"
+                        onClick={handleDeleteUser}
+                      >
+                        Confirm
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        ))}
+      </Table>
 
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction
-                            className="bg-red-600"
-                            onClick={handleDeleteUser}
-                          >
-                            Continue
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            ))}
-          </Table>
-
-          {showMore && (
-            <button
-              onClick={handleShowMore}
-              className="w-full text-blue-700 self-center text-sm py-7"
-            >
-              Show more
-            </button>
-          )}
-        </>
-      ) : (
-        <p>You have no subscriber yet!</p>
+      {showMore && (
+        <button
+          onClick={handleShowMore}
+          className="text-blue-700 hover:underline self-center text-sm py-7"
+        >
+          Show more
+        </button>
       )}
-    </div>
+    </>
+  ) : (
+    <p className="text-slate-600 mt-10 text-sm italic">You have no subscribers yet!</p>
+  )}
+</div>
+
   )
 }
 

@@ -29,43 +29,86 @@ const BottomNavBar = () => {
   }
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-slate-200 border-t border-gray-300 p-2 flex justify-around">
-      <Link
-        to="/dashboard?tab=profile"
-        className="flex flex-col items-center text-slate-800"
-      >
-        <FaUserAlt size={20} />
-        <span className="text-xs">Profile</span>
-      </Link>
+    // <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-slate-200 border-t border-gray-300 p-2 flex justify-around">
+    //   <Link
+    //     to="/dashboard?tab=profile"
+    //     className="flex flex-col items-center text-slate-800"
+    //   >
+    //     <FaUserAlt size={20} />
+    //     <span className="text-xs">Profile</span>
+    //   </Link>
 
-      {currentUser && currentUser.isAdmin && (
-        <Link
-          to="/create-post"
-          className="flex flex-col items-center text-slate-800"
-        >
-          <IoIosCreate size={20} />
-          <span className="text-xs">Create Post</span>
-        </Link>
-      )}
+    //   {currentUser && currentUser.isAdmin && (
+    //     <Link
+    //       to="/create-post"
+    //       className="flex flex-col items-center text-slate-800"
+    //     >
+    //       <IoIosCreate size={20} />
+    //       <span className="text-xs">Create Post</span>
+    //     </Link>
+    //   )}
 
-      {currentUser && currentUser.isAdmin && (
-        <Link
-          to="/dashboard?tab=posts"
-          className="flex flex-col items-center text-slate-800"
-        >
-          <IoIosDocument size={20} />
-          <span className="text-xs">Posts</span>
-        </Link>
-      )}
+    //   {currentUser && currentUser.isAdmin && (
+    //     <Link
+    //       to="/dashboard?tab=posts"
+    //       className="flex flex-col items-center text-slate-800"
+    //     >
+    //       <IoIosDocument size={20} />
+    //       <span className="text-xs">Posts</span>
+    //     </Link>
+    //   )}
 
-      <button
-        className="flex flex-col items-center text-slate-800"
-        onClick={handleSignout}
-      >
-        <FaSignOutAlt size={20} />
-        <span className="text-xs">Logout</span>
-      </button>
-    </nav>
+    //   <button
+    //     className="flex flex-col items-center text-slate-800"
+    //     onClick={handleSignout}
+    //   >
+    //     <FaSignOutAlt size={20} />
+    //     <span className="text-xs">Logout</span>
+    //   </button>
+    // </nav>
+
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-yellow-50 border-t border-amber-300 px-4 py-2 flex justify-around shadow-inner z-50">
+  {/* Profile */}
+  <Link
+    to="/dashboard?tab=profile"
+    className="flex flex-col items-center text-slate-700 hover:text-amber-600 transition"
+  >
+    <FaUserAlt size={20} />
+    <span className="text-xs mt-1">Profile</span>
+  </Link>
+
+  {/* Create Post (Admin only) */}
+  {currentUser?.isAdmin && (
+    <Link
+      to="/create-post"
+      className="flex flex-col items-center text-slate-700 hover:text-amber-600 transition"
+    >
+      <IoIosCreate size={22} />
+      <span className="text-xs mt-1">Create</span>
+    </Link>
+  )}
+
+  {/* Posts (Admin only) */}
+  {currentUser?.isAdmin && (
+    <Link
+      to="/dashboard?tab=posts"
+      className="flex flex-col items-center text-slate-700 hover:text-amber-600 transition"
+    >
+      <IoIosDocument size={20} />
+      <span className="text-xs mt-1">Posts</span>
+    </Link>
+  )}
+
+  {/* Logout */}
+  <button
+    onClick={handleSignout}
+    className="flex flex-col items-center text-slate-700 hover:text-red-500 transition"
+  >
+    <FaSignOutAlt size={20} />
+    <span className="text-xs mt-1">Logout</span>
+  </button>
+</nav>
+
   )
 }
 

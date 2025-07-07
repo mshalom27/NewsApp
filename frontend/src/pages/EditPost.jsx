@@ -127,95 +127,183 @@ const EditPost = () => {
   }
 
   return (
-    <div className="p-3 max-w-3xl mx-auto min-h-screen">
-      <h1 className="text-center text-3xl my-7 font-semibold text-slate-700">
-        Edit post
-      </h1>
+    // <div className="p-3 max-w-3xl mx-auto min-h-screen">
+    //   <h1 className="text-center text-3xl my-7 font-semibold text-slate-700">
+    //     Edit post
+    //   </h1>
 
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-4 sm:flex-row justify-between">
-          <Input
-            type="text"
-            placeholder="Title"
-            required
-            id="title"
-            className="w-full sm:w-3/4 h-12 border border-slate-400 focus-visible:ring-0 focus-visible:ring-offset-0"
-            onChange={(e) =>
-              setFormData({ ...formData, title: e.target.value })
-            }
-            value={formData.title}
-          />
+    //   <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+    //     <div className="flex flex-col gap-4 sm:flex-row justify-between">
+    //       <Input
+    //         type="text"
+    //         placeholder="Title"
+    //         required
+    //         id="title"
+    //         className="w-full sm:w-3/4 h-12 border border-slate-400 focus-visible:ring-0 focus-visible:ring-offset-0"
+    //         onChange={(e) =>
+    //           setFormData({ ...formData, title: e.target.value })
+    //         }
+    //         value={formData.title}
+    //       />
 
-          <Select
-            onValueChange={(value) =>
-              setFormData({ ...formData, category: value })
-            }
-            value={formData.category}
-          >
-            <SelectTrigger className="w-full sm:w-1/4 h-12 border border-slate-400 focus-visible:ring-0 focus-visible:ring-offset-0">
-              <SelectValue placeholder="Select a Category" />
-            </SelectTrigger>
+    //       <Select
+    //         onValueChange={(value) =>
+    //           setFormData({ ...formData, category: value })
+    //         }
+    //         value={formData.category}
+    //       >
+    //         <SelectTrigger className="w-full sm:w-1/4 h-12 border border-slate-400 focus-visible:ring-0 focus-visible:ring-offset-0">
+    //           <SelectValue placeholder="Select a Category" />
+    //         </SelectTrigger>
 
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Category</SelectLabel>
-                <SelectItem value="worldnews">World News</SelectItem>
-                <SelectItem value="sportsnews">Sports News</SelectItem>
-                <SelectItem value="localnews">Local News</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
+    //         <SelectContent>
+    //           <SelectGroup>
+    //             <SelectLabel>Category</SelectLabel>
+    //             <SelectItem value="worldnews">World News</SelectItem>
+    //             <SelectItem value="sportsnews">Sports News</SelectItem>
+    //             <SelectItem value="localnews">Local News</SelectItem>
+    //           </SelectGroup>
+    //         </SelectContent>
+    //       </Select>
+    //     </div>
 
-        <div className="flex gap-4 items-center justify-between border-4 border-slate-600 border-dotted p-3">
-          <Input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
+    //     <div className="flex gap-4 items-center justify-between border-4 border-slate-600 border-dotted p-3">
+    //       <Input
+    //         type="file"
+    //         accept="image/*"
+    //         onChange={(e) => setFile(e.target.files[0])}
+    //       />
 
-          <Button
-            type="button"
-            className="bg-slate-700"
-            onClick={handleUploadImage}
-          >
-            {imageUploading ? "Uploading..." : "Upload Image"}
-          </Button>
-        </div>
+    //       <Button
+    //         type="button"
+    //         className="bg-slate-700"
+    //         onClick={handleUploadImage}
+    //       >
+    //         {imageUploading ? "Uploading..." : "Upload Image"}
+    //       </Button>
+    //     </div>
 
-        {imageUploadError && <p className="text-red-600">{imageUploadError}</p>}
+    //     {imageUploadError && <p className="text-red-600">{imageUploadError}</p>}
 
-        {formData.image && (
-          <img
-            src={formData.image}
-            alt="upload"
-            className="w-full h-72 object-cover"
-          />
-        )}
+    //     {formData.image && (
+    //       <img
+    //         src={formData.image}
+    //         alt="upload"
+    //         className="w-full h-72 object-cover"
+    //       />
+    //     )}
 
-        <ReactQuill
-          theme="snow"
-          placeholder="Write something here..."
-          className="h-72  mb-12"
-          required
-          onChange={(value) => {
-            setFormData({ ...formData, content: value })
-          }}
-          value={formData.content}
-        />
+    //     <ReactQuill
+    //       theme="snow"
+    //       placeholder="Write something here..."
+    //       className="h-72  mb-12"
+    //       required
+    //       onChange={(value) => {
+    //         setFormData({ ...formData, content: value })
+    //       }}
+    //       value={formData.content}
+    //     />
 
-        <Button
-          type="submit"
-          className="h-12 bg-green-600 font-semibold max-sm:mt-5 text-md"
-        >
-          Update Your Article
-        </Button>
+    //     <Button
+    //       type="submit"
+    //       className="h-12 bg-green-600 font-semibold max-sm:mt-5 text-md"
+    //     >
+    //       Update Your Article
+    //     </Button>
 
-        {updatePostError && (
-          <p className="text-red-600 mt-5">{updatePostError}</p>
-        )}
-      </form>
+    //     {updatePostError && (
+    //       <p className="text-red-600 mt-5">{updatePostError}</p>
+    //     )}
+    //   </form>
+    // </div>
+
+    <div className="p-4 sm:p-6 max-w-4xl mx-auto min-h-screen bg-yellow-50">
+  <h1 className="text-center text-3xl font-bold text-slate-800 my-8">
+    Edit Article
+  </h1>
+
+  <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+
+    <div className="flex flex-col sm:flex-row gap-4 justify-between">
+      <Input
+        type="text"
+        id="title"
+        placeholder="Enter article title"
+        required
+        className="w-full sm:w-3/4 h-12 border border-gray-300 rounded-md px-4 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+        value={formData.title}
+        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+      />
+
+      <Select
+        onValueChange={(value) => setFormData({ ...formData, category: value })}
+        value={formData.category}
+      >
+        <SelectTrigger className="w-full sm:w-1/4 h-12 border border-gray-300 rounded-md px-4 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+          <SelectValue placeholder="Select a Category" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Category</SelectLabel>
+            <SelectItem value="worldnews">World News</SelectItem>
+            <SelectItem value="sportsnews">Sports News</SelectItem>
+            <SelectItem value="localnews">Local News</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     </div>
+
+    <div className="flex flex-col sm:flex-row gap-4 items-center justify-between border-2 border-amber-400 border-dashed rounded-md p-4 bg-white">
+      <Input
+        type="file"
+        accept="image/*"
+        onChange={(e) => setFile(e.target.files[0])}
+        className="w-full sm:w-auto"
+      />
+
+      <Button
+        type="button"
+        className="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-4 py-2 rounded-md transition"
+        onClick={handleUploadImage}
+      >
+        {imageUploading ? "Uploading..." : "Upload Image"}
+      </Button>
+    </div>
+
+    {imageUploadError && (
+      <p className="text-red-600 text-sm">{imageUploadError}</p>
+    )}
+
+    {formData.image && (
+      <img
+        src={formData.image}
+        alt="Uploaded preview"
+        className="w-full h-72 object-cover rounded-md"
+      />
+    )}
+
+    <ReactQuill
+      theme="snow"
+      placeholder="Write your article here..."
+      className="h-72 bg-white rounded-md"
+      value={formData.content}
+      onChange={(value) => setFormData({ ...formData, content: value })}
+      required
+    />
+
+    <Button
+      type="submit"
+      className="bg-green-600 hover:bg-green-700 text-white font-semibold h-12 rounded-md"
+    >
+      Update Your Article
+    </Button>
+
+    {updatePostError && (
+      <p className="text-red-600 text-sm mt-2">{updatePostError}</p>
+    )}
+  </form>
+</div>
+
   )
 }
 

@@ -1,102 +1,141 @@
+
 import Advertise from "@/components/shared/Advertise"
 import PostCard from "@/components/shared/PostCard"
 import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
-import React, { useEffect, useState } from "react"
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
+import React, { useEffect, useState, useRef } from "react"
 import { Link } from "react-router-dom"
 
 const Home = () => {
   const [posts, setPosts] = useState([])
+  const scrollRef = useRef(null)
 
-  // console.log(posts)
+  const features = [
+    {
+      title: "Curated Coverage",
+      description: "Stay updated with handpicked stories across politics, science, culture, and more.",
+      icon: "📰",
+    },
+    {
+      title: "Engaged Community",
+      description: "Join thoughtful discussions, comment on posts, and connect with like-minded readers.",
+      icon: "💬",
+    },
+    {
+      title: "Seamless Experience",
+      description: "Enjoy a fast, clean, and intuitive interface across all your devices.",
+      icon: "⚡",
+    },
+    {
+      title: "Verified Sources",
+      description: "We prioritize accuracy and credibility from trusted publishers.",
+      icon: "✅",
+    },
+    {
+      title: "Real-time Updates",
+      description: "Stay ahead with breaking news and live updates as they happen.",
+      icon: "📡",
+    },
+    {
+      title: "Bookmark Favorites",
+      description: "Save articles you love and come back to them anytime.",
+      icon: "🔖",
+    },
+  ]
+
+  const scroll = (dir) => {
+    const scrollAmount = scrollRef.current?.offsetWidth || 300
+    scrollRef.current?.scrollBy({
+      left: dir === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    })
+  }
 
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await fetch("/api/post/getPosts?limit=6")
-
       const data = await res.json()
-
       if (res.ok) {
         setPosts(data.posts)
       }
     }
-
     fetchPosts()
   }, [])
 
   return (
-    <div>
-      <div className="flex flex-col gap-6 p-28 max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-blue-800">
-          Welcome to <span className="text-red-600"> Morning Dispatch</span>
-        </h1>
-
-        <p className="text-gray-600 mt-3 text-lg">
-          Your trusted source for the latest headlines, in-depth analysis, and
-          breaking news every morning.
-        </p>
-
-        <p className="text-gray-500 mt-1 italic">Stay informed, stay ahead.</p>
-
-        <Link to={"/search"}>
-          <Button className="bg-yellow-400 hover:bg-yellow-600 text-black py-3 px-6 rounded-full font-semibold shadow-lg flex items-center gap-2 w-fit">
-            View all posts <ArrowRight className="h-5 w-5" />
-          </Button>
-        </Link>
+    <div className="bg-amber-100">
+      {/* Hero Section */}
+      <div className="relative overflow-hidden bg-amber-100">
+        <div className="max-w-7xl mx-auto px-6 py-10 md:py-18 text-center md:text-left">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 leading-tight">
+            Discover Truth With <br />
+            <span className="text-amber-600">News</span>
+            <span className="text-gray-900">World</span>
+          </h1>
+          <p className="mt-6 text-lg text-gray-700 max-w-xl">
+            Daily headlines, deep dives, and trending updates. The world in your pocket.
+          </p>
+          <Link to="/search">
+            <Button className="mt-6 bg-amber-400 hover:bg-amber-500 text-black py-3 px-6 rounded-full font-semibold shadow-md flex items-center gap-2 w-fit">
+              View all posts <ArrowRight className="h-5 w-5" />
+            </Button>
+          </Link>
+        </div>
       </div>
 
-      <section className="pb-16 bg-white">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8 text-gray-800">
-            Why You'll Love Morning Dispatch
-          </h2>
+      {/* Feature Highlights Section */}
+      <section className="py-16 relative bg-amber-100">
+        <h2 className="text-5xl font-bold  text-amber-600 text-center mb-10">Why Readers Choose Us</h2>
+        <div className="relative max-w-6xl mx-auto px-4">
+          {/* Left Arrow */}
+          <button
+            onClick={() => scroll("left")}
+            className="absolute -left-4 top-1/2 -translate-y-1/2 bg-white border shadow-md rounded-full p-2 z-10"
+          >
+            <ChevronLeft className="w-5 h-5 text-gray-600" />
+          </button>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <FeatureCard
-              title={"Diverse Content"}
-              description={
-                "Explore news on a variety of topics, from technology to lifestyle."
-              }
-              icon="📚"
-            />
-
-            <FeatureCard
-              title={"Community Driven"}
-              description={
-                "Connect with writers and readers who share your interests."
-              }
-              icon="🌐"
-            />
-
-            <FeatureCard
-              title={"Easy to Use"}
-              description={
-                "A seamless platform for sharing and discovering great content."
-              }
-              icon="🚀"
-            />
+          {/* Scrollable Feature Cards */}
+          <div
+            ref={scrollRef}
+            className="overflow-x-auto scrollbar-hide flex gap-6 scroll-smooth snap-x snap-mandatory"
+            style={{ scrollBehavior: "smooth", scrollSnapType: "x mandatory" }}
+          >
+            {features.map((feature, i) => (
+              <div key={i} className="snap-start w-[300px] flex-shrink-0">
+                <FeatureCard {...feature} />
+              </div>
+            ))}
           </div>
+
+          {/* Right Arrow */}
+          <button
+            onClick={() => scroll("right")}
+            className="absolute -right-4 top-1/2 -translate-y-1/2 bg-white border shadow-md rounded-full p-2 z-10"
+          >
+            <ChevronRight className="w-5 h-5 text-gray-600" />
+          </button>
         </div>
       </section>
 
-      <div className="p-3 bg-white">
+      {/* Ad Section */}
+      <div className="px-4 py-6">
         <Advertise />
       </div>
 
-      <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 py-7">
-        {posts && posts.length > 0 && (
+      {/* Recent Posts Section */}
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        {posts?.length > 0 && (
           <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-bold text-slate-700">Recent Posts</h2>
-
-            <div className="flex flex-wrap gap-4">
+            <h2 className="text-2xl font-bold text-gray-800">Recent Posts</h2>
+            <div className="flex flex-wrap gap-6 justify-center sm:justify-start">
               {posts.map((post) => (
                 <PostCard key={post._id} post={post} />
               ))}
             </div>
-
             <Link
-              to={"/search"}
-              className="text-lg hover:underline text-center font-semibold"
+              to="/search"
+              className="text-lg hover:underline text-center font-semibold text-amber-700"
             >
               View all news
             </Link>
@@ -109,12 +148,13 @@ const Home = () => {
 
 const FeatureCard = ({ title, description, icon }) => {
   return (
-    <div className="p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 text-center">
-      <div className="text-5xl mb-4">{icon}</div>
-      <h3 className="text-2xl font-semibold text-gray-800 mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+    <div className="bg-gray-100 rounded-xl p-6 shadow hover:shadow-lg transition-shadow duration-300 h-full flex flex-col items-center justify-start text-center">
+      <div className="text-4xl mb-3">{icon}</div>
+      <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
+      <p className="text-gray-600 text-sm">{description}</p>
     </div>
   )
 }
 
 export default Home
+
