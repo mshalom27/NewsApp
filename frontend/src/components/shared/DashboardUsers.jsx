@@ -28,7 +28,6 @@ const DashboardUsers = () => {
   const { currentUser } = useSelector((state) => state.user)
 
   const [users, setUsers] = useState([])
-  // console.log(userPosts)
 
   const [showMore, setShowMore] = useState(true)
   const [userIdToDelete, setUserIdToDelete] = useState("")
@@ -96,106 +95,7 @@ const DashboardUsers = () => {
   }
 
   return (
-    // <div className="flex flex-col items-center justify-center w-full p-3">
-    //   {currentUser.isAdmin && users.length > 0 ? (
-    //     <>
-    //       <Table>
-    //         <TableCaption>A list of your recent subscribers.</TableCaption>
-
-    //         <TableHeader>
-    //           <TableRow>
-    //             <TableHead className="w-[200px]">Joined On</TableHead>
-    //             <TableHead>User Image</TableHead>
-    //             <TableHead>Username</TableHead>
-    //             <TableHead>Email</TableHead>
-    //             <TableHead>Admin</TableHead>
-    //             <TableHead>Delete</TableHead>
-    //           </TableRow>
-    //         </TableHeader>
-
-    //         {users.map((user) => (
-    //           <TableBody className="divide-y" key={user._id}>
-    //             <TableRow>
-    //               <TableCell>
-    //                 {new Date(user.createdAt).toLocaleDateString()}
-    //               </TableCell>
-
-    //               <TableCell>
-    //                 <img
-    //                   src={user.profilePicture}
-    //                   alt={user.username}
-    //                   className="w-10 h-10 object-cover bg-gray-500 rounded-full"
-    //                 />
-    //               </TableCell>
-
-    //               <TableCell>{user.username}</TableCell>
-
-    //               <TableCell>{user.email}</TableCell>
-
-    //               <TableCell>
-    //                 {user.isAdmin ? (
-    //                   <FaCheck className="text-green-600" />
-    //                 ) : (
-    //                   <RxCross2 className="text-red-600" />
-    //                 )}
-    //               </TableCell>
-
-    //               <TableCell>
-    //                 <AlertDialog>
-    //                   <AlertDialogTrigger asChild>
-    //                     <span
-    //                       onClick={() => {
-    //                         setUserIdToDelete(user._id)
-    //                       }}
-    //                       className="font-medium text-red-600 hover:underline cursor-pointer"
-    //                     >
-    //                       Delete
-    //                     </span>
-    //                   </AlertDialogTrigger>
-
-    //                   <AlertDialogContent>
-    //                     <AlertDialogHeader>
-    //                       <AlertDialogTitle>
-    //                         Are you absolutely sure?
-    //                       </AlertDialogTitle>
-
-    //                       <AlertDialogDescription>
-    //                         This action cannot be undone. This will permanently
-    //                         delete your subscriber and remove your data from our
-    //                         servers.
-    //                       </AlertDialogDescription>
-    //                     </AlertDialogHeader>
-
-    //                     <AlertDialogFooter>
-    //                       <AlertDialogCancel>Cancel</AlertDialogCancel>
-    //                       <AlertDialogAction
-    //                         className="bg-red-600"
-    //                         onClick={handleDeleteUser}
-    //                       >
-    //                         Continue
-    //                       </AlertDialogAction>
-    //                     </AlertDialogFooter>
-    //                   </AlertDialogContent>
-    //                 </AlertDialog>
-    //               </TableCell>
-    //             </TableRow>
-    //           </TableBody>
-    //         ))}
-    //       </Table>
-
-    //       {showMore && (
-    //         <button
-    //           onClick={handleShowMore}
-    //           className="w-full text-blue-700 self-center text-sm py-7"
-    //         >
-    //           Show more
-    //         </button>
-    //       )}
-    //     </>
-    //   ) : (
-    //     <p>You have no subscriber yet!</p>
-    //   )}
-    // </div>
+  
 
     <div className="flex flex-col items-center justify-center w-full p-3">
   {currentUser.isAdmin && users.length > 0 ? (

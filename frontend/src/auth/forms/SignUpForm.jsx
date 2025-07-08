@@ -35,7 +35,6 @@ const SignUpForm = () => {
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
 
-  // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,7 +44,6 @@ const SignUpForm = () => {
     },
   })
 
-  // 2. Define a submit handler.
   async function onSubmit(values) {
     try {
       setLoading(true)
@@ -160,7 +158,6 @@ const SignUpForm = () => {
             )}
           />
 
-          {/* Submit Button */}
           <Button
             type="submit"
             className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 rounded-md transition"

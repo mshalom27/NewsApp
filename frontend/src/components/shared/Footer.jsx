@@ -6,8 +6,7 @@ const Footer = () => {
     
     <div className="bg-gray-900 text-gray-300 py-10">
   <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-10">
-    {/* About Us */}
-    <div>
+\    <div>
       <h2 className="text-xl font-semibold text-gray-200 mb-4">About Us</h2>
       <p className="text-sm leading-relaxed text-gray-400">
         NewsWorld is committed to delivering fast, accurate, and reliable news.
@@ -15,7 +14,6 @@ const Footer = () => {
       </p>
     </div>
 
-    {/* Quick Links */}
     <div>
       <h2 className="text-xl font-semibold text-gray-200 mb-4">Quick Links</h2>
       <ul className="space-y-3 text-sm">
@@ -34,7 +32,6 @@ const Footer = () => {
       </ul>
     </div>
 
-    {/* Contact Us */}
     <div>
       <h2 className="text-xl font-semibold text-gray-200 mb-4">Contact Us</h2>
       <ul className="text-sm space-y-2">
@@ -45,7 +42,6 @@ const Footer = () => {
     </div>
   </div>
 
-  {/* Footer Bottom */}
   <div className="mt-12 border-t border-gray-700 pt-6 text-center">
     <p className="text-sm text-gray-400">Follow us on:</p>
     <div className="flex justify-center space-x-6 mt-4 text-sm">

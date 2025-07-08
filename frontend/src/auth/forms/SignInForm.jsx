@@ -39,7 +39,6 @@ const SignInForm = () => {
 
   const { loading, error: errorMessage } = useSelector((state) => state.user)
 
-  // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,7 +47,6 @@ const SignInForm = () => {
     },
   })
 
-  // 2. Define a submit handler.
   async function onSubmit(values) {
     try {
       dispatch(signInStart())
