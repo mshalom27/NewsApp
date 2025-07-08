@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -10,11 +11,12 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
-import { getFilePreview, uploadFile } from "@/lib/appwrite/uploadImage"
+import { uploadFile } from "@/lib/appwrite/uploadImage" // Removed getFilePreview import
 import React, { useState } from "react"
 import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
 import { useNavigate } from "react-router-dom"
+import { appwriteConfig } from "@/lib/appwrite/config" // Import config for IDs
 
 const CreatePost = () => {
   const { toast } = useToast()
@@ -25,9 +27,12 @@ const CreatePost = () => {
   const [imageUploading, setImageUploading] = useState(false)
 
   const [formData, setFormData] = useState({})
-  // console.log(formData)
 
   const [createPostError, setCreatePostError] = useState(null)
+
+  const getFileViewUrl = (fileId) => {
+    return `https://cloud.appwrite.io/v1/storage/buckets/${appwriteConfig.storageId}/files/${fileId}/view?project=${appwriteConfig.projectId}`
+  }
 
   const handleUploadImage = async () => {
     try {
@@ -38,11 +43,11 @@ const CreatePost = () => {
       }
 
       setImageUploading(true)
-
       setImageUploadError(null)
 
       const uploadedFile = await uploadFile(file)
-      const postImageUrl = getFilePreview(uploadedFile.$id)
+
+      const postImageUrl = getFileViewUrl(uploadedFile.$id)
 
       setFormData({ ...formData, image: postImageUrl })
 
@@ -75,7 +80,6 @@ const CreatePost = () => {
       if (!res.ok) {
         toast({ title: "Something went wrong! Please try again." })
         setCreatePostError(data.message)
-
         return
       }
 

@@ -21,7 +21,6 @@ mongoose
 
 const app = express()
 
-// for allowing json object in req body
 app.use(express.json())
 app.use(cookieParser())
 

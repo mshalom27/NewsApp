@@ -1,14 +1,21 @@
 import { ID, ImageGravity } from "appwrite"
 import { appwriteConfig, storage } from "./config"
+import { Permission, Role } from "appwrite"
 
-// Upload File
+
 export async function uploadFile(file) {
   try {
     const uploadedFile = await storage.createFile(
       appwriteConfig.storageId,
       ID.unique(),
-      file
+      file, 
+      [
+    Permission.read(Role.any())
+     ]
     )
+
+    console.log("Uploaded file ID:", uploadedFile.$id) // ✅ DEBUG LINE
+
 
     return uploadedFile
   } catch (error) {
@@ -16,7 +23,6 @@ export async function uploadFile(file) {
   }
 }
 
-// Get File Url
 export function getFilePreview(fileId) {
   try {
     const fileUrl = storage.getFilePreview(

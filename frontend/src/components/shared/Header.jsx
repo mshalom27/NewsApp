@@ -98,16 +98,27 @@ const Header = () => {
 
     <nav>
       <ul className="flex gap-4">
+
         {["Home", "About", "News Articles"].map((item) => {
-          const path = item === "Home" ? "/" : `/${item.toLowerCase().replace(" ", "")}`;
-          return (
-            <Link key={item} to={path}>
-              <li className="hidden lg:inline text-gray-300 hover:text-amber-400 cursor-pointer select-none transition-colors">
-                {item}
-              </li>
-            </Link>
-          );
-        })}
+  let path = "/"
+
+  if (item === "Home") {
+    path = "/"
+  } else if (item === "News Articles") {
+    path = "/search?query="
+  } else {
+    path = `/${item.toLowerCase().replace(" ", "")}`
+  }
+
+  return (
+    <Link key={item} to={path}>
+      <li className="hidden lg:inline text-gray-300 hover:text-amber-400 cursor-pointer select-none transition-colors">
+        {item}
+      </li>
+    </Link>
+  )
+})}
+
       </ul>
     </nav>
 

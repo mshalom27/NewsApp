@@ -6,7 +6,7 @@ const Footer = () => {
     
     <div className="bg-gray-900 text-gray-300 py-10">
   <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-10">
-\    <div>
+   <div>
       <h2 className="text-xl font-semibold text-gray-200 mb-4">About Us</h2>
       <p className="text-sm leading-relaxed text-gray-400">
         NewsWorld is committed to delivering fast, accurate, and reliable news.

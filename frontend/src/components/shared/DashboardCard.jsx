@@ -44,7 +44,7 @@ const DashboardCard = ({
   return (
     
 
-    <Card className="flex flex-col bg-white border border-amber-200 shadow-sm rounded-lg">
+    <Card className="flex flex-col bg-amber-100 border border-amber-200 shadow-sm rounded-lg">
   <CardHeader className="items-center text-center pb-0">
     <CardTitle className="text-xl font-bold text-slate-800">{title}</CardTitle>
     <CardDescription className="text-sm text-slate-500">{description}</CardDescription>
