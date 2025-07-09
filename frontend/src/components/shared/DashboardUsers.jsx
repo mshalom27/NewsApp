@@ -35,7 +35,7 @@ const DashboardUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`/api/user/getusers`)
+        const res = await fetch(`https://newsapp-mwio.onrender.com/api/user/getusers`)
 
         const data = await res.json()
 
@@ -60,7 +60,7 @@ const DashboardUsers = () => {
     const startIndex = users.length
 
     try {
-      const res = await fetch(`/api/user/getusers?startIndex=${startIndex}`)
+      const res = await fetch(`https://newsapp-mwio.onrender.com/api/user/getusers?startIndex=${startIndex}`)
 
       const data = await res.json()
 
@@ -78,7 +78,7 @@ const DashboardUsers = () => {
 
   const handleDeleteUser = async () => {
     try {
-      const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
+      const res = await fetch(`https://newsapp-mwio.onrender.com/api/user/delete/${userIdToDelete}`, {
         method: "DELETE",
       })
 

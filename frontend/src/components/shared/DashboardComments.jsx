@@ -35,7 +35,7 @@ const DashboardComments = () => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await fetch(`/api/comment/getcomments`)
+        const res = await fetch(`https://newsapp-mwio.onrender.com/api/comment/getcomments`)
 
         const data = await res.json()
 
@@ -61,7 +61,7 @@ const DashboardComments = () => {
 
     try {
       const res = await fetch(
-        `/api/comment/getcomments?startIndex=${startIndex}`
+        `https://newsapp-mwio.onrender.com/api/comment/getcomments?startIndex=${startIndex}`
       )
 
       const data = await res.json()
@@ -81,7 +81,7 @@ const DashboardComments = () => {
   const handleDeleteComment = async () => {
     try {
       const res = await fetch(
-        `/api/comment/deleteComment/${commentIdToDelete}`,
+        `https://newsapp-mwio.onrender.com/api/comment/deleteComment/${commentIdToDelete}`,
         {
           method: "DELETE",
         }

@@ -69,7 +69,7 @@ const CreatePost = () => {
     e.preventDefault()
 
     try {
-      const res = await fetch("/api/post/create", {
+      const res = await fetch("https://newsapp-mwio.onrender.com/api/post/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

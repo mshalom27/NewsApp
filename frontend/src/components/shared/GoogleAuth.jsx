@@ -18,7 +18,7 @@ const GoogleAuth = () => {
     try {
       const firebaseResponse = await signInWithPopup(auth, provider)
 
-      const res = await fetch("/api/auth/google", {
+      const res = await fetch("https://newsapp-mwio.onrender.com/api/auth/google", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

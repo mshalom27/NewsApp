@@ -23,7 +23,7 @@ const PostDetails = () => {
       try {
         setLoading(true)
 
-        const res = await fetch(`/api/post/getposts?slug=${postSlug}`)
+        const res = await fetch(`https://newsapp-mwio.onrender.com/api/post/getposts?slug=${postSlug}`)
 
         const data = await res.json()
 
@@ -51,7 +51,7 @@ const PostDetails = () => {
   useEffect(() => {
     try {
       const fetchRecentPosts = async () => {
-        const res = await fetch(`/api/post/getposts?limit=3`)
+        const res = await fetch(`https://newsapp-mwio.onrender.com/api/post/getposts?limit=3`)
 
         const data = await res.json()
 
