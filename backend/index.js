@@ -31,7 +31,7 @@ app.listen(5000, () => {
 
 app.use(
   cors({
-    origin: "https://news-a09h3w51p-shaloms-projects-85afb396.vercel.app/",
+    origin: "https://news-a09h3w51p-shaloms-projects-85afb396.vercel.app",
     credentials: true,
   })
 );
