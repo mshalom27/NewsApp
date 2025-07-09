@@ -2,6 +2,7 @@ import express from "express"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser"
+import cors from "cors";
 
 import authRoutes from "./routes/auth.route.js"
 import userRoutes from "./routes/user.route.js"
@@ -28,10 +29,10 @@ app.listen(5000, () => {
   console.log("Server is running on port 5000!")
 })
 
-app.use("/api/auth", authRoutes)
-app.use("/api/user", userRoutes)
-app.use("/api/post", postRoutes)
-app.use("/api/comment", commentRoutes)
+app.use("https://newsapp-mwio.onrender.com/api/auth", authRoutes)
+app.use("https://newsapp-mwio.onrender.com/api/user", userRoutes)
+app.use("https://newsapp-mwio.onrender.com/api/post", postRoutes)
+app.use("https://newsapp-mwio.onrender.com/api/comment", commentRoutes)
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500
@@ -44,3 +45,10 @@ app.use((err, req, res, next) => {
     message,
   })
 })
+
+app.use(
+  cors({
+    origin: "https://news-app-ten-chi-27.vercel.app/",
+    credentials: true,
+  })
+);
