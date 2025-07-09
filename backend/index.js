@@ -29,6 +29,13 @@ app.listen(5000, () => {
   console.log("Server is running on port 5000!")
 })
 
+app.use(
+  cors({
+    origin: "https://news-a09h3w51p-shaloms-projects-85afb396.vercel.app/",
+    credentials: true,
+  })
+);
+
 app.use("/api/auth", authRoutes)
 app.use("/api/user", userRoutes)
 app.use("/api/post", postRoutes)
@@ -46,9 +53,3 @@ app.use((err, req, res, next) => {
   })
 })
 
-app.use(
-  cors({
-    origin: "https://news-app-ten-chi-27.vercel.app/",
-    credentials: true,
-  })
-);
