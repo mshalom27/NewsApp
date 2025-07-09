@@ -29,10 +29,10 @@ app.listen(5000, () => {
   console.log("Server is running on port 5000!")
 })
 
-app.use("https://newsapp-mwio.onrender.com/api/auth", authRoutes)
-app.use("https://newsapp-mwio.onrender.com/api/user", userRoutes)
-app.use("https://newsapp-mwio.onrender.com/api/post", postRoutes)
-app.use("https://newsapp-mwio.onrender.com/api/comment", commentRoutes)
+app.use("/api/auth", authRoutes)
+app.use("/api/user", userRoutes)
+app.use("/api/post", postRoutes)
+app.use("/api/comment", commentRoutes)
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500
