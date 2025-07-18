@@ -2,7 +2,7 @@ import express from "express"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser"
-import cors from "cors";
+import cors from "cors"
 
 import authRoutes from "./routes/auth.route.js"
 import userRoutes from "./routes/user.route.js"
@@ -25,16 +25,23 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 
-app.listen(5000, () => {
-  console.log("Server is running on port 5000!")
-})
+const allowedOrigins = [
+  "https://news-app-ten-chi-27.vercel.app",
+  "https://news-a09h3w51p-shaloms-projects-85afb396.vercel.app",
+]
 
 app.use(
   cors({
-    origin: "https://news-a09h3w51p-shaloms-projects-85afb396.vercel.app",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true)
+      } else {
+        callback(new Error("Not allowed by CORS"))
+      }
+    },
     credentials: true,
   })
-);
+)
 
 app.use("/api/auth", authRoutes)
 app.use("/api/user", userRoutes)
@@ -43,9 +50,7 @@ app.use("/api/comment", commentRoutes)
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500
-
   const message = err.message || "Internal Server Error"
-
   res.status(statusCode).json({
     success: false,
     statusCode,
@@ -53,3 +58,6 @@ app.use((err, req, res, next) => {
   })
 })
 
+app.listen(5000, () => {
+  console.log("Server is running on port 5000!")
+})
